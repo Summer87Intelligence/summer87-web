@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import HeaderLogo from "@/components/layout/HeaderLogo";
 
 const LOCALES = [
   { code: "es", label: "ES", flag: "🇪🇸" },
@@ -55,24 +56,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-3 group">
-          <div className="relative w-8 h-8">
-            <div className="w-8 h-8 rounded-lg bg-aqua-blue-gradient flex items-center justify-center shadow-aqua-sm group-hover:shadow-aqua-md transition-shadow">
-              <span className="text-brand-background font-display font-bold text-xs tracking-tight">
-                S87
-              </span>
-            </div>
-            <div className="absolute inset-0 rounded-lg bg-aqua-blue-gradient opacity-0 group-hover:opacity-20 blur-md transition-opacity" />
-          </div>
-          <div className="flex flex-col leading-none">
-            <span className="font-display font-bold text-text-primary text-base tracking-tight">
-              Summer87
-            </span>
-            <span className="font-mono text-[10px] text-accent-aqua tracking-widest uppercase opacity-70">
-              Intelligence
-            </span>
-          </div>
-        </a>
+        <HeaderLogo />
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
