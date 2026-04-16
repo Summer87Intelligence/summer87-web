@@ -7,16 +7,16 @@ export const metadata: Metadata = {
     default: "Summer87 — Intelligent Business Engines",
   },
   description:
-    "Summer87 is a disruptive AI consulting firm specializing in Intelligent Business Engines, Neuroventas, and the Summer87 BI Suite. We reimagine how businesses operate.",
+    "Summer87 designs intelligent business engines: strategy, data, AI, neuroventas, BI, and proprietary software when it creates leverage. The name honors Clipper Summer87.",
   keywords: [
     "intelligent business engines",
-    "AI consulting",
-    "neuroventas",
     "business intelligence",
+    "neuroventas",
+    "artificial intelligence consulting",
     "ERP",
     "summer87",
-    "consultora IA",
-    "motores inteligentes de negocios",
+    "Clipper Summer87",
+    "motores inteligentes de negocio",
   ],
   authors: [{ name: "Summer87", url: "https://summer87.ai" }],
   creator: "Summer87",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     siteName: "Summer87",
     title: "Summer87 — Intelligent Business Engines",
     description:
-      "Consultora disruptiva en motores inteligentes de negocios. Neuroventas, IA operativa y Suite BI Summer87.",
+      "Consultora en motores inteligentes de negocio: neuroventas, IA, BI y automatización. El nombre rinde homenaje a Clipper Summer87.",
     images: [
       {
         url: "/og-image.png",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Summer87 — Intelligent Business Engines",
     description:
-      "Consultora disruptiva en motores inteligentes de negocios.",
+      "Motores inteligentes de negocio: estrategia, datos, IA y operación. Summer87.",
     images: ["/og-image.png"],
   },
   robots: {

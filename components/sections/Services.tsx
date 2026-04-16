@@ -19,17 +19,19 @@ interface ServiceCardProps {
   iconIndex: number;
   learnMore: string;
   featured?: boolean;
+  anchorId?: string;
 }
 
 function ServiceCard({
-  badge, title, subtitle, description, features, iconIndex, learnMore, featured
+  badge, title, subtitle, description, features, iconIndex, learnMore, featured, anchorId
 }: ServiceCardProps) {
   const { icon: Icon, color, border, glow } = SERVICE_ICONS[iconIndex];
 
   return (
     <div
+      id={anchorId}
       className={cn(
-        "group relative rounded-2xl p-8 glass-card transition-all duration-500 cursor-pointer",
+        "group relative rounded-2xl p-8 glass-card transition-all duration-500 cursor-pointer scroll-mt-28",
         featured && "ring-1 ring-accent-aqua/40 shadow-aqua-md"
       )}
       style={{
@@ -38,15 +40,6 @@ function ServiceCard({
           : undefined,
       }}
     >
-      {/* Featured badge */}
-      {featured && (
-        <div className="absolute -top-3 left-8">
-          <div className="px-3 py-1 rounded-full premium-chip text-[10px] font-mono font-bold tracking-wider uppercase">
-            Core Service
-          </div>
-        </div>
-      )}
-
       {/* Icon */}
       <div
         className={cn(
@@ -86,7 +79,7 @@ function ServiceCard({
 
       {/* Learn more */}
       <a
-        href="#contact"
+        href="#contacto"
         className="inline-flex items-center gap-2 text-sm font-semibold text-accent-blue hover:text-accent-aqua transition-colors group/link"
       >
         {learnMore}
@@ -109,6 +102,7 @@ function ServiceCard({
 
 export default function Services() {
   const t = useTranslations("services");
+  const methodologyFooter = t("methodology_footer");
 
   const services: ServiceCardProps[] = [
     {
@@ -138,11 +132,12 @@ export default function Services() {
       features:     [t("s3_features.0"), t("s3_features.1"), t("s3_features.2"), t("s3_features.3")],
       iconIndex:    2,
       learnMore:    t("learn_more"),
+      anchorId:     "suite-bi",
     },
   ];
 
   return (
-    <section id="services" className="relative py-32 overflow-hidden">
+    <section id="services" className="relative py-32 overflow-hidden scroll-mt-28">
       {/* Background */}
       <div className="absolute inset-0 bg-brand-surface2" />
       <div className="absolute inset-0 dots-bg opacity-40" />
@@ -177,7 +172,7 @@ export default function Services() {
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-brand-border bg-brand-surface1/60">
             <div className="w-1.5 h-1.5 rounded-full bg-accent-green animate-pulse" />
             <span className="text-text-muted text-sm font-mono">
-              Metodología Summer87 · Resultados medibles en 90 días
+              {methodologyFooter}
             </span>
           </div>
         </div>

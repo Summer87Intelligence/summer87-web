@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
+import OriginSection from "@/components/sections/OriginSection";
 import Services from "@/components/sections/Services";
-import About from "@/components/sections/About";
-import CTA from "@/components/sections/CTA";
+import ContactSection from "@/components/sections/ContactSection";
 import { locales } from "@/i18n";
 
 interface PageProps {
@@ -42,9 +42,9 @@ export default async function HomePage({ params: { locale } }: PageProps) {
     <main className="relative">
       <Navbar />
       <Hero />
+      <OriginSection />
       <Services />
-      <About />
-      <CTA />
+      <ContactSection />
       <Footer />
     </main>
   );

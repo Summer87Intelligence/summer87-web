@@ -114,37 +114,22 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 w-full">
         <div className="max-w-3xl">
 
-          {/* Label */}
-          <div className="flex items-center gap-3 mb-8 animate-fade-in">
-            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent-blue/30 bg-accent-aqua/10">
-              <div className="w-1.5 h-1.5 rounded-full bg-accent-aqua animate-pulse" />
-              <span className="text-accent-aqua text-xs font-mono tracking-widest uppercase">
-                {t("label")}
-              </span>
-            </div>
+          {/* Slogan de marca */}
+          <div className="mb-8 flex animate-fade-in justify-center md:justify-start">
+            <p className="max-w-xl text-center font-display text-xl font-bold leading-tight tracking-tight text-tech-gradient md:text-left md:text-2xl lg:text-3xl">
+              {t("label")}
+            </p>
           </div>
 
           {/* Headline */}
-          <div className="space-y-1 mb-8">
-            <h1
-              className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-text-primary leading-[1.05] animate-fade-up"
-              style={{ animationDelay: "100ms" }}
-            >
-              {t("headline_1")}
-            </h1>
-            <h1
-              className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-tech-shimmer leading-[1.05] animate-fade-up"
-              style={{ animationDelay: "200ms" }}
-            >
-              {t("headline_2")}
-            </h1>
-            <h1
-              className="font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.05] animate-fade-up"
-              style={{ animationDelay: "300ms" }}
-            >
-              <span className="text-tech-gradient">{t("headline_3")}</span>
-            </h1>
-          </div>
+          <h1
+            className="font-display font-bold text-4xl sm:text-5xl md:text-5xl lg:text-6xl text-text-primary leading-[1.12] mb-8 animate-fade-up"
+            style={{ animationDelay: "100ms" }}
+          >
+            {t("headline_part1")}
+            <span className="text-tech-gradient">{t("headline_gradient")}</span>
+            {t("headline_part2")}
+          </h1>
 
           {/* Subheadline */}
           <p
@@ -159,13 +144,13 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-4 mb-16 animate-fade-up"
             style={{ animationDelay: "500ms" }}
           >
-            <a href="#contact" className="btn-primary">
+            <a href="#contacto" className="btn-primary">
               <span className="flex items-center gap-2">
                 {t("cta_primary")}
                 <ArrowRight size={16} />
               </span>
             </a>
-            <a href="#suite" className="btn-secondary">
+            <a href="#services" className="btn-secondary">
               {t("cta_secondary")}
             </a>
           </div>
@@ -181,7 +166,7 @@ export default function Hero() {
               { value: t("stat_3_value"), label: t("stat_3_label") },
             ].map((stat, i) => (
               <div key={i} className="space-y-1">
-                <div className="stat-number text-3xl md:text-4xl leading-none">
+                <div className="font-display text-lg font-semibold leading-tight tracking-tight text-text-primary md:text-xl">
                   {stat.value}
                 </div>
                 <div className="text-text-muted text-xs leading-snug">

@@ -39,10 +39,10 @@ export default function Navbar() {
   };
 
   const navLinks = [
+    { href: "#origin", label: t("history") },
     { href: "#services", label: t("services") },
-    { href: "#about", label: t("about") },
-    { href: "#suite", label: t("suite") },
-    { href: "#contact", label: t("contact") },
+    { href: "#suite-bi", label: t("suite") },
+    { href: "#contacto", label: t("contact") },
   ];
 
   return (
@@ -56,13 +56,13 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <HeaderLogo />
+        <HeaderLogo slogan={t("slogan")} />
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
-              key={link.href}
+              key={`${link.href}-${link.label}`}
               href={link.href}
               className="text-sm text-text-secondary hover:text-accent-pastel transition-colors duration-200 font-medium relative group"
             >
@@ -93,7 +93,7 @@ export default function Navbar() {
           </div>
 
           {/* CTA */}
-          <a href="#contact" className="btn-primary text-xs px-5 py-2.5">
+          <a href="#contacto" className="btn-primary text-xs px-5 py-2.5">
             <span>{t("cta")}</span>
           </a>
         </div>
@@ -118,7 +118,7 @@ export default function Navbar() {
         <div className="px-6 py-4 bg-brand-background/95 backdrop-blur-xl border-t border-brand-border space-y-4">
           {navLinks.map((link) => (
             <a
-              key={link.href}
+              key={`${link.href}-${link.label}`}
               href={link.href}
               onClick={() => setMobileOpen(false)}
               className="block text-sm text-text-secondary hover:text-accent-pastel transition-colors py-2 font-medium"
@@ -146,7 +146,7 @@ export default function Navbar() {
             ))}
           </div>
           <a
-            href="#contact"
+            href="#contacto"
             onClick={() => setMobileOpen(false)}
             className="btn-primary w-full text-center text-sm mt-2 block"
           >

@@ -123,7 +123,7 @@ Aunque el proxy esté en modo "DNS only" para el apex, puedes aprovechar Cloudfl
 
 ### 5.1 Email con Cloudflare Email Routing
 1. **Email → Email Routing → Enable**
-2. Crea regla: `hello@summer87.ai` → `tu-email-personal@gmail.com`
+2. Crea regla: `hola@summer87.ai` → `tu-email-personal@gmail.com`
 3. Esto te da emails profesionales @summer87.ai gratis
 
 ### 5.2 Page Rules (opcional)

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Zap, Target, TrendingUp } from "lucide-react";
 
@@ -61,20 +62,25 @@ export default function About() {
               </p>
             </div>
 
-            {/* 87 visual */}
-            <div className="mt-10 flex items-center gap-4">
-              <div className="relative">
-                <div className="font-display font-bold text-[7rem] leading-none text-transparent bg-clip-text"
-                     style={{ WebkitTextStroke: "1px rgba(23,168,255,0.30)" }}>
-                  87
-                </div>
-                <div className="absolute inset-0 font-display font-bold text-[7rem] leading-none text-tech-gradient opacity-60 blur-[2px]">
-                  87
-                </div>
+            {/* Logo — vínculo con Clipper Summer87 */}
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5 lg:gap-6">
+              <div className="relative shrink-0 flex justify-start sm:self-center">
+                <Image
+                  src="/summer87.png"
+                  alt="Summer87"
+                  width={300}
+                  height={300}
+                  className="w-24 sm:w-28 md:w-40 lg:w-52 h-auto object-contain opacity-90"
+                  priority
+                />
               </div>
-              <div className="text-text-muted text-sm leading-relaxed max-w-[200px]">
-                El porcentaje de decisiones empresariales tomadas sin datos suficientes.
-                <span className="text-premium-400 font-semibold"> Estamos aquí para cambiarlo.</span>
+              <div className="max-w-md space-y-2 sm:pb-0">
+                <p className="font-mono text-xs uppercase tracking-widest text-accent-aqua">
+                  {t("visual_lead")}
+                </p>
+                <p className="text-sm leading-relaxed text-text-secondary md:text-base">
+                  {t("visual_text")}
+                </p>
               </div>
             </div>
           </div>
@@ -103,31 +109,11 @@ export default function About() {
               );
             })}
 
-            {/* Social proof placeholder */}
-            <div className="p-6 rounded-xl border border-premium-400/25 bg-premium-400/8">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((n) => (
-                    <div
-                      key={n}
-                      className="w-8 h-8 rounded-full border-2 border-brand-surface2 bg-brand-surface1 flex items-center justify-center text-xs font-bold text-premium-400"
-                    >
-                      {["A", "M", "J", "+"][n - 1]}
-                    </div>
-                  ))}
-                </div>
-                <div className="flex gap-0.5">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <svg key={s} width="12" height="12" viewBox="0 0 24 24" fill="#F2C14E">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-              <p className="text-text-secondary text-sm italic">
-                "Summer87 transformó la manera en que tomamos decisiones. En 90 días nuestro pipeline se triplicó."
+            <div className="rounded-xl border border-brand-border bg-brand-surface1/40 p-6 md:p-8">
+              <p className="text-base font-medium leading-relaxed text-text-primary md:text-lg">
+                {t("testimonial_quote")}
               </p>
-              <p className="text-premium-400 text-xs font-mono mt-2">— CEO, Empresa de tecnología financiera</p>
+              <p className="mt-4 font-mono text-xs text-text-muted">{t("testimonial_note")}</p>
             </div>
           </div>
         </div>

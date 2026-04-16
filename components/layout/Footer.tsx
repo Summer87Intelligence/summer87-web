@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Linkedin, Twitter, Mail } from "lucide-react";
 
@@ -10,10 +11,10 @@ export default function Footer() {
     services: [
       { label: t("neuroventas"), href: "#services" },
       { label: t("motores"),     href: "#services" },
-      { label: t("suite"),       href: "#suite"    },
+      { label: t("suite"),       href: "#services" },
     ],
     company: [
-      { label: t("about"),   href: "#about"   },
+      { label: t("history"), href: "#origin" },
       { label: t("blog"),    href: "/blog"    },
       { label: t("careers"), href: "/careers" },
     ],
@@ -34,9 +35,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-aqua-blue-gradient flex items-center justify-center shadow-aqua-sm">
-                <span className="text-brand-background font-display font-bold text-sm">S87</span>
-              </div>
+              <Image
+                src="/summer87.png"
+                alt="Summer87"
+                width={160}
+                height={48}
+                className="h-9 w-auto shrink-0 object-contain md:h-10"
+              />
               <div>
                 <div className="font-display font-bold text-text-primary leading-none">Summer87</div>
                 <div className="font-mono text-[9px] text-accent-aqua tracking-widest uppercase opacity-60 mt-0.5">
@@ -51,7 +56,7 @@ export default function Footer() {
               {[
                 { icon: Linkedin, href: "https://linkedin.com/company/summer87", label: "LinkedIn" },
                 { icon: Twitter,  href: "https://twitter.com/summer87ai",        label: "Twitter"  },
-                { icon: Mail,     href: "mailto:hello@summer87.ai",              label: "Email"    },
+                { icon: Mail,     href: "mailto:hola@summer87.ai",            label: "Email"    },
               ].map((social) => {
                 const Icon = social.icon;
                 return (

@@ -6,6 +6,8 @@ import { ArrowRight, Shield, Clock, CheckCircle } from "lucide-react";
 export default function CTA() {
   const t = useTranslations("cta");
 
+  const cardItems = [t("card_item_1"), t("card_item_2"), t("card_item_3")];
+
   const trusts = [
     { icon: Shield,       label: t("trust_1") },
     { icon: Clock,        label: t("trust_2") },
@@ -13,7 +15,7 @@ export default function CTA() {
   ];
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden">
+    <section id="conversar" className="relative py-32 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-brand-surface2" />
       <div className="absolute inset-0 grid-bg opacity-30" />
@@ -33,8 +35,7 @@ export default function CTA() {
 
         {/* Headline */}
         <h2 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-text-primary mb-6 leading-tight">
-          {t("headline").split("?")[0]}
-          <span className="text-tech-gradient">?</span>
+          {t("headline")}
         </h2>
 
         <p className="text-text-secondary text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
@@ -44,7 +45,7 @@ export default function CTA() {
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
           <a
-            href="mailto:hello@summer87.ai"
+            href="mailto:hola@summer87.ai"
             className="btn-primary text-base px-8 py-4 shadow-aqua-md"
           >
             <span className="flex items-center gap-2">
@@ -78,21 +79,21 @@ export default function CTA() {
                 <span className="text-brand-background font-bold text-xs">S87</span>
               </div>
               <div>
-                <div className="text-text-primary text-sm font-semibold">Sesión Estratégica</div>
-                <div className="text-text-muted text-xs font-mono">45 min · Free · Video call</div>
+                <div className="text-text-primary text-sm font-semibold">{t("card_title")}</div>
+                <div className="text-text-muted text-xs font-mono">{t("card_subtitle")}</div>
               </div>
             </div>
             <div className="space-y-2">
-              {["Diagnóstico de tu modelo actual", "Identificación de motores clave", "Hoja de ruta inicial"].map((item, i) => (
+              {cardItems.map((item, i) => (
                 <div key={i} className="flex items-center gap-2 text-xs text-text-secondary">
                   <div className="w-1 h-1 rounded-full bg-premium-400" />
                   {item}
                 </div>
               ))}
             </div>
-            <div className="mt-4 pt-4 border-t border-brand-border flex items-center justify-between">
-              <span className="text-xs text-text-muted font-mono">Próxima disponibilidad</span>
-              <span className="text-xs text-accent-green font-semibold">Esta semana</span>
+            <div className="mt-4 flex items-center justify-between border-t border-brand-border pt-4">
+              <span className="font-mono text-xs text-text-muted">{t("card_footer_label")}</span>
+              <span className="text-xs font-medium text-text-secondary">{t("card_footer_value")}</span>
             </div>
           </div>
         </div>
