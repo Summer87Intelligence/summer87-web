@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Compass, Scale, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
 import { staggerChildren } from "@/lib/animation/motion";
 import { useReducedMotionSafe } from "@/lib/animation/useReducedMotionSafe";
@@ -164,22 +164,46 @@ export default function Hero() {
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
             }}
-            className="grid grid-cols-3 gap-6 md:gap-9 xl:gap-10 pt-6 lg:pt-[1.7rem] border-t border-brand-border/90"
+            className="relative border-t border-brand-border/90 pt-8 lg:pt-[2.25rem]"
           >
-            {[
-              { value: t("stat_1_value"), label: t("stat_1_label") },
-              { value: t("stat_2_value"), label: t("stat_2_label") },
-              { value: t("stat_3_value"), label: t("stat_3_label") },
-            ].map((stat, i) => (
-              <div key={i} className="space-y-1">
-                <div className="font-display text-lg font-semibold leading-tight tracking-tight text-text-primary md:text-xl stat-number">
-                  {stat.value}
+            <div
+              className="pointer-events-none absolute left-[6%] right-[6%] top-[2.35rem] z-0 hidden h-px md:block"
+              aria-hidden="true"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(18,217,217,0.2) 18%, rgba(23,168,255,0.16) 50%, rgba(18,217,217,0.2) 82%, transparent 100%)",
+              }}
+            />
+            <div className="relative z-[1] grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-0 md:divide-x md:divide-brand-border/40">
+              {(
+                [
+                  { value: t("stat_1_value"), label: t("stat_1_label"), mark: "01", Icon: Compass },
+                  { value: t("stat_2_value"), label: t("stat_2_label"), mark: "02", Icon: Scale },
+                  { value: t("stat_3_value"), label: t("stat_3_label"), mark: "03", Icon: Rocket },
+                ] as const
+              ).map((stat, i) => (
+                <div
+                  key={stat.mark}
+                  className={`relative text-left ${i > 0 ? "md:pl-6 lg:pl-10" : ""}`}
+                >
+                  <span
+                    className="pointer-events-none absolute -left-1 -top-5 select-none font-display text-5xl font-bold tabular-nums tracking-tight text-accent-aqua/[0.08] md:-top-1 md:text-6xl lg:text-[4.25rem]"
+                    aria-hidden="true"
+                  >
+                    {stat.mark}
+                  </span>
+                  <div className="relative z-[1] flex gap-3">
+                    <stat.Icon className="mt-0.5 h-5 w-5 shrink-0 text-accent-aqua/70" strokeWidth={1.5} aria-hidden />
+                    <div className="min-w-0">
+                      <div className="stat-number font-display text-lg font-semibold leading-tight tracking-tight md:text-xl">
+                        {stat.value}
+                      </div>
+                      <p className="mt-2 text-xs leading-relaxed text-text-muted md:text-sm">{stat.label}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-text-muted text-xs leading-snug">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </motion.div>
         </div>
       </motion.div>
