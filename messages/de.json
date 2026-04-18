@@ -22,7 +22,10 @@
     "stat_2_label": "Neuroventas, KI und BI in Phasen mit klarer Sprache für Führung und Betrieb.",
     "stat_3_value": "Umsetzung",
     "stat_3_label": "Explizite Deliverables und Beratungsbegleitung—ohne das Urteil der Geschäftsführung zu ersetzen.",
-    "scroll_indicator_label": "Zum nächsten Abschnitt"
+    "scroll_indicator_label": "Zum nächsten Abschnitt",
+    "micro_bullet_1": "Chancen erkennen",
+    "micro_bullet_2": "Aktionen priorisieren",
+    "micro_bullet_3": "Entscheidungen aktivieren"
   },
   "origin": {
     "label": "Der Ursprung von Summer87",
@@ -134,7 +137,6 @@
     "privacy": "Datenschutz",
     "terms": "AGB",
     "cookies": "Cookies",
-    "copyright": "© 2025 Summer87. Alle Rechte vorbehalten.",
-    "made_with": "Summer87 · Strategie, Daten und angewandte KI fürs Geschäft"
+    "copyright": "© 2025 Summer87. Alle Rechte vorbehalten."
   }
 }

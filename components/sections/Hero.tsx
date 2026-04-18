@@ -1,11 +1,13 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowRight, Compass, Scale, Rocket } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { staggerChildren } from "@/lib/animation/motion";
 import { useReducedMotionSafe } from "@/lib/animation/useReducedMotionSafe";
 import { LANDING_EVENTS, trackLandingEvent } from "@/lib/analytics/tracking";
+import HeroOceStats from "@/components/hero/HeroOceStats";
+import HeroVisualMicroBullets from "@/components/hero/HeroVisualMicroBullets";
 import ScrollIndicator from "@/components/hero/ScrollIndicator";
 import HeroNavigator from "@/components/hero/HeroNavigator";
 
@@ -53,13 +55,13 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden noise-overlay scroll-mt-28 bg-[#050A0E]"
     >
-      <div className="absolute inset-0 bg-[#050A0E]" aria-hidden="true" />
+      <div className="absolute inset-0 z-0 bg-[#050A0E]" aria-hidden="true" />
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_90%_55%_at_12%_18%,rgba(18,217,217,0.11),transparent_50%),radial-gradient(ellipse_70%_48%_at_92%_22%,rgba(23,168,255,0.12),transparent_52%),radial-gradient(ellipse_60%_42%_at_55%_95%,rgba(18,217,217,0.06),transparent_58%)]"
+        className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_90%_55%_at_12%_18%,rgba(18,217,217,0.11),transparent_50%),radial-gradient(ellipse_70%_48%_at_92%_22%,rgba(23,168,255,0.12),transparent_52%),radial-gradient(ellipse_60%_42%_at_55%_95%,rgba(18,217,217,0.06),transparent_58%)]"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.4]"
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.4]"
         aria-hidden="true"
         style={{
           backgroundImage: `
@@ -71,25 +73,20 @@ export default function Hero() {
         }}
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_35%_at_50%_0%,rgba(23,168,255,0.06),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_50%_35%_at_50%_0%,rgba(23,168,255,0.06),transparent_70%)]"
         aria-hidden="true"
       />
 
       <HeroDataNetworkLayer />
 
-      <div
-        className="pointer-events-none absolute inset-y-0 right-0 z-[2] hidden w-[min(54%,520px)] max-w-[520px] items-center justify-center overflow-visible lg:flex"
-        aria-hidden="true"
-      >
-        <HeroNavigator className="relative h-full min-h-[320px] w-full max-w-[460px] -translate-x-1 pr-2 xl:-translate-x-3 xl:pr-4" />
-      </div>
-
-      <motion.div
-        variants={staggerChildren(0.08, 0.11)}
-        initial={shouldReduceMotion ? undefined : "hidden"}
-        animate={shouldReduceMotion ? undefined : "visible"}
-        className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 lg:pt-[8.75rem] lg:pb-[5.75rem] w-full"
-      >
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-20 lg:pt-[8.75rem] lg:pb-24">
+        <div className="grid w-full grid-cols-1 gap-10 md:gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] lg:items-start lg:gap-8 xl:gap-10 lg:pb-12">
+        <motion.div
+          variants={staggerChildren(0.08, 0.11)}
+          initial={shouldReduceMotion ? undefined : "hidden"}
+          animate={shouldReduceMotion ? undefined : "visible"}
+          className="relative min-w-0 w-full self-start lg:min-w-0"
+        >
         <div className="max-w-3xl xl:max-w-[42.5rem] hero-content-panel">
           <div
             aria-hidden="true"
@@ -166,55 +163,28 @@ export default function Hero() {
               {t("cta_secondary")}
             </a>
           </motion.div>
-
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-            }}
-            className="relative border-t border-brand-border/90 pt-8 lg:pt-[2.25rem]"
-          >
-            <div
-              className="pointer-events-none absolute left-[6%] right-[6%] top-[2.35rem] z-0 hidden h-px md:block"
-              aria-hidden="true"
-              style={{
-                background:
-                  "linear-gradient(90deg, transparent 0%, rgba(18,217,217,0.2) 18%, rgba(23,168,255,0.16) 50%, rgba(18,217,217,0.2) 82%, transparent 100%)",
-              }}
-            />
-            <div className="relative z-[1] grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-0 md:divide-x md:divide-brand-border/40">
-              {(
-                [
-                  { value: t("stat_1_value"), label: t("stat_1_label"), mark: "01", Icon: Compass },
-                  { value: t("stat_2_value"), label: t("stat_2_label"), mark: "02", Icon: Scale },
-                  { value: t("stat_3_value"), label: t("stat_3_label"), mark: "03", Icon: Rocket },
-                ] as const
-              ).map((stat, i) => (
-                <div
-                  key={stat.mark}
-                  className={`relative text-left ${i > 0 ? "md:pl-6 lg:pl-10" : ""}`}
-                >
-                  <span
-                    className="pointer-events-none absolute -left-1 -top-5 select-none font-display text-5xl font-bold tabular-nums tracking-tight text-accent-aqua/[0.08] md:-top-1 md:text-6xl lg:text-[4.25rem]"
-                    aria-hidden="true"
-                  >
-                    {stat.mark}
-                  </span>
-                  <div className="relative z-[1] flex gap-3">
-                    <stat.Icon className="mt-0.5 h-5 w-5 shrink-0 text-accent-aqua/70" strokeWidth={1.5} aria-hidden />
-                    <div className="min-w-0">
-                      <div className="stat-number font-display text-lg font-semibold leading-tight tracking-tight md:text-xl">
-                        {stat.value}
-                      </div>
-                      <p className="mt-2 text-xs leading-relaxed text-text-muted md:text-sm">{stat.label}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
         </div>
-      </motion.div>
+        </motion.div>
+
+        <div className="relative z-[5] mt-10 hidden w-full min-w-0 flex-col items-center self-start overflow-visible lg:mt-0 lg:flex lg:pr-2 xl:pr-4">
+          <div
+            className="pointer-events-none flex w-full shrink-0 justify-center lg:-translate-y-1.5 xl:-translate-y-1"
+            aria-hidden="true"
+          >
+            <div className="flex h-[min(88vw,340px)] w-[min(88vw,340px)] max-h-[340px] max-w-[340px] items-center justify-center overflow-visible sm:max-h-[360px] sm:max-w-[360px] lg:h-[300px] lg:w-[300px] lg:max-h-[300px] lg:max-w-[300px] xl:h-[312px] xl:w-[312px] xl:max-h-[312px] xl:max-w-[312px]">
+              <HeroNavigator />
+            </div>
+          </div>
+          <div className="mt-7 w-full min-w-0 shrink-0 px-0.5">
+            <HeroVisualMicroBullets />
+          </div>
+        </div>
+        </div>
+
+        <div className="mt-8 w-full min-w-0 lg:mt-10">
+          <HeroOceStats variant="band" />
+        </div>
+      </div>
 
       <ScrollIndicator />
 

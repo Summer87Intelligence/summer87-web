@@ -22,7 +22,10 @@
     "stat_2_label": "Neuroventas, IA y BI con alcance acotado por etapas y lenguaje claro para dirección y operación.",
     "stat_3_value": "Ejecución",
     "stat_3_label": "Entregables explícitos y acompañamiento consultivo, sin sustituir el juicio de quien conduce el negocio.",
-    "scroll_indicator_label": "Ir a la siguiente sección"
+    "scroll_indicator_label": "Ir a la siguiente sección",
+    "micro_bullet_1": "Detecta oportunidades",
+    "micro_bullet_2": "Prioriza acciones",
+    "micro_bullet_3": "Activa decisiones"
   },
   "origin": {
     "label": "El origen de Summer87",
@@ -134,7 +137,6 @@
     "privacy": "Privacidad",
     "terms": "Términos",
     "cookies": "Cookies",
-    "copyright": "© 2025 Summer87. Todos los derechos reservados.",
-    "made_with": "Summer87 · Estrategia, datos e IA aplicados al negocio"
+    "copyright": "© 2025 Summer87. Todos los derechos reservados."
   }
 }

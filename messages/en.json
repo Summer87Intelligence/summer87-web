@@ -22,7 +22,10 @@
     "stat_2_label": "Neuroventas, AI, and BI scoped in phases with clear language for leadership and operations.",
     "stat_3_value": "Delivery",
     "stat_3_label": "Explicit deliverables and consultative support—without replacing the judgment of those who run the business.",
-    "scroll_indicator_label": "Go to the next section"
+    "scroll_indicator_label": "Go to the next section",
+    "micro_bullet_1": "Spot opportunities",
+    "micro_bullet_2": "Prioritize actions",
+    "micro_bullet_3": "Activate decisions"
   },
   "origin": {
     "label": "The origin of Summer87",
@@ -134,7 +137,6 @@
     "privacy": "Privacy",
     "terms": "Terms",
     "cookies": "Cookies",
-    "copyright": "© 2025 Summer87. All rights reserved.",
-    "made_with": "Summer87 · Strategy, data, and applied AI for business"
+    "copyright": "© 2025 Summer87. All rights reserved."
   }
 }

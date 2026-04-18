@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Linkedin, Twitter, Mail } from "lucide-react";
 import Reveal from "@/components/motion/Reveal";
 
 export default function Footer() {
@@ -46,28 +45,9 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <p className="text-text-secondary text-sm leading-relaxed mb-6 max-w-[220px]">
+            <p className="text-text-secondary text-sm leading-relaxed max-w-[220px]">
               {t("tagline")}
             </p>
-            <div className="flex items-center gap-3">
-              {[
-                { icon: Linkedin, href: "https://linkedin.com/company/summer87", label: "LinkedIn" },
-                { icon: Twitter,  href: "https://twitter.com/summer87ai",        label: "Twitter"  },
-                { icon: Mail,     href: "mailto:hola@summer87.ai",            label: "Email"    },
-              ].map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    aria-label={social.label}
-                    className="w-9 h-9 rounded-lg border border-accent-pastel/45 flex items-center justify-center text-accent-pastel hover:text-accent-yellow hover:border-accent-yellow transition-all duration-200 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent-yellow/80"
-                  >
-                    <Icon size={15} />
-                  </a>
-                );
-              })}
-            </div>
           </Reveal>
 
           {/* Services */}
@@ -104,14 +84,10 @@ export default function Footer() {
         </div>
 
         <Reveal
-          className="mt-12 flex w-full max-w-6xl flex-col items-center justify-between gap-4 border-t border-brand-border pt-8 mx-auto sm:flex-row"
+          className="mt-12 w-full max-w-6xl border-t border-brand-border pt-8 mx-auto"
           delay={0.12}
         >
-          <p className="text-accent-pastel text-xs font-mono">{t("copyright")}</p>
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-accent-aqua animate-pulse" />
-            <span className="text-accent-pastel text-xs font-mono">{t("made_with")}</span>
-          </div>
+          <p className="text-accent-pastel text-xs font-mono text-center sm:text-left">{t("copyright")}</p>
         </Reveal>
       </div>
     </footer>
