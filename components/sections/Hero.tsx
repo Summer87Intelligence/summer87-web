@@ -1,46 +1,41 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import HeroDepthScene from "@/components/3d/HeroDepthScene";
 import { staggerChildren } from "@/lib/animation/motion";
 import { useReducedMotionSafe } from "@/lib/animation/useReducedMotionSafe";
 import { LANDING_EVENTS, trackLandingEvent } from "@/lib/analytics/tracking";
 
-function ParticleField({ reduceMotion, isMobile }: { reduceMotion: boolean; isMobile: boolean }) {
-  const particles = useMemo(
-    () =>
-      Array.from({ length: isMobile ? 18 : 34 }, (_, i) => ({
-        id: i,
-        left: `${(i * 17) % 100}%`,
-        top: `${(i * 29) % 100}%`,
-        delay: `${(i % 8) * 0.7}s`,
-        duration: `${7 + (i % 6) * 1.3}s`,
-        size: i % 4 === 0 ? 2 : 1,
-        opacity: 0.08 + (i % 6) * 0.04,
-      })),
-    [isMobile]
-  );
-
+function HeroDataNetworkLayer() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      {particles.map((p) => (
-        <div
-          key={p.id}
-          className={`absolute rounded-full bg-accent-aqua ${reduceMotion ? "" : "animate-pulse"}`}
-          style={{
-            left: p.left,
-            top: p.top,
-            width: p.size,
-            height: p.size,
-            opacity: p.opacity,
-            animationDelay: p.delay,
-            animationDuration: p.duration,
-          }}
-        />
-      ))}
+    <div
+      className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+      aria-hidden="true"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,rgba(0,200,255,0.08),transparent_58%)]" />
+      <div className="absolute inset-0 opacity-[0.18] md:opacity-[0.22]">
+        <svg
+          className="h-full w-full"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <line x1="20" y1="30" x2="60" y2="20" stroke="rgba(0,200,255,0.16)" strokeWidth="0.12" vectorEffect="non-scaling-stroke" />
+          <line x1="60" y1="20" x2="80" y2="60" stroke="rgba(0,200,255,0.16)" strokeWidth="0.12" vectorEffect="non-scaling-stroke" />
+          <line x1="20" y1="30" x2="40" y2="70" stroke="rgba(0,200,255,0.16)" strokeWidth="0.12" vectorEffect="non-scaling-stroke" />
+          <line x1="40" y1="70" x2="78" y2="78" stroke="rgba(0,200,255,0.1)" strokeWidth="0.08" vectorEffect="non-scaling-stroke" />
+          <line x1="10" y1="55" x2="35" y2="48" stroke="rgba(0,200,255,0.08)" strokeWidth="0.08" vectorEffect="non-scaling-stroke" />
+          <line x1="55" y1="42" x2="92" y2="35" stroke="rgba(0,200,255,0.08)" strokeWidth="0.08" vectorEffect="non-scaling-stroke" />
+        </svg>
+      </div>
+      <div className="absolute inset-0 opacity-[0.22] md:opacity-[0.28]">
+        <div className="absolute left-[20%] top-[30%] h-1.5 w-1.5 rounded-full bg-cyan-400/50" />
+        <div className="absolute left-[60%] top-[20%] h-1.5 w-1.5 rounded-full bg-cyan-400/50" />
+        <div className="absolute left-[80%] top-[60%] h-1.5 w-1.5 rounded-full bg-cyan-400/50" />
+        <div className="absolute left-[40%] top-[70%] h-1.5 w-1.5 rounded-full bg-cyan-400/50" />
+      </div>
     </div>
   );
 }
@@ -50,28 +45,35 @@ export default function Hero() {
   const locale = useLocale();
   const reduceMotion = useReducedMotionSafe();
   const shouldReduceMotion = Boolean(reduceMotion);
-  const [isMobile, setIsMobile] = useState(true);
-
-  useEffect(() => {
-    const media = window.matchMedia("(max-width: 1023px)");
-    const sync = () => setIsMobile(media.matches);
-    sync();
-    media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
-  }, []);
 
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden noise-overlay premium-depth-bg scroll-mt-28"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden noise-overlay scroll-mt-28 bg-[#050A0E]"
     >
-      <div className="absolute inset-0 bg-surface-gradient" aria-hidden="true" />
-      <div className="absolute inset-0 grid-bg opacity-35" aria-hidden="true" />
-      <div className="absolute inset-0 bg-tech-mesh" aria-hidden="true" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(18,217,217,0.14),transparent_38%),radial-gradient(circle_at_80%_24%,rgba(23,168,255,0.16),transparent_35%),radial-gradient(circle_at_55%_72%,rgba(242,193,78,0.1),transparent_30%)]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[#050A0E]" aria-hidden="true" />
+      <div
+        className="absolute inset-0 bg-[radial-gradient(ellipse_90%_55%_at_12%_18%,rgba(18,217,217,0.11),transparent_50%),radial-gradient(ellipse_70%_48%_at_92%_22%,rgba(23,168,255,0.12),transparent_52%),radial-gradient(ellipse_60%_42%_at_55%_95%,rgba(18,217,217,0.06),transparent_58%)]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.4]"
+        aria-hidden="true"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(23,168,255,0.045) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(18,217,217,0.038) 1px, transparent 1px),
+            repeating-linear-gradient(106deg, transparent 0px, transparent 47px, rgba(18,217,217,0.025) 48px, transparent 49px)
+          `,
+          backgroundSize: "72px 72px, 72px 72px, auto",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_35%_at_50%_0%,rgba(23,168,255,0.06),transparent_70%)]"
+        aria-hidden="true"
+      />
 
-      <ParticleField reduceMotion={shouldReduceMotion} isMobile={isMobile} />
-      <HeroDepthScene isMobile={isMobile} />
+      <HeroDataNetworkLayer />
 
       <motion.div
         variants={staggerChildren(0.08, 0.11)}
