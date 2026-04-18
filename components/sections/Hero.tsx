@@ -7,6 +7,7 @@ import { staggerChildren } from "@/lib/animation/motion";
 import { useReducedMotionSafe } from "@/lib/animation/useReducedMotionSafe";
 import { LANDING_EVENTS, trackLandingEvent } from "@/lib/analytics/tracking";
 import ScrollIndicator from "@/components/hero/ScrollIndicator";
+import HeroNavigator from "@/components/hero/HeroNavigator";
 
 function HeroDataNetworkLayer() {
   return (
@@ -75,6 +76,13 @@ export default function Hero() {
       />
 
       <HeroDataNetworkLayer />
+
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 z-[2] hidden w-[min(54%,520px)] max-w-[520px] items-center justify-center overflow-visible lg:flex"
+        aria-hidden="true"
+      >
+        <HeroNavigator className="relative h-full min-h-[320px] w-full max-w-[460px] -translate-x-1 pr-2 xl:-translate-x-3 xl:pr-4" />
+      </div>
 
       <motion.div
         variants={staggerChildren(0.08, 0.11)}
