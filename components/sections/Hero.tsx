@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { staggerChildren } from "@/lib/animation/motion";
 import { useReducedMotionSafe } from "@/lib/animation/useReducedMotionSafe";
 import { LANDING_EVENTS, trackLandingEvent } from "@/lib/analytics/tracking";
+import ScrollIndicator from "@/components/hero/ScrollIndicator";
 
 function HeroDataNetworkLayer() {
   return (
@@ -182,6 +183,8 @@ export default function Hero() {
           </motion.div>
         </div>
       </motion.div>
+
+      <ScrollIndicator />
 
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-background to-transparent pointer-events-none" aria-hidden="true" />
     </section>
