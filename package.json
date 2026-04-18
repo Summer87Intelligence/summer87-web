@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "node -e \"const fs=require('fs'); fs.rmSync('.next',{recursive:true,force:true});\"",
+    "kill:node:win": "powershell -NoProfile -Command \"$p = Get-CimInstance Win32_Process | Where-Object { $_.Name -eq 'node.exe' -and $_.CommandLine -match 'next dev' } | ForEach-Object { $_.ProcessId }; if ($p) { Stop-Process -Id $p -Force }; exit 0\"",
+    "reset": "node -e \"const fs=require('fs'); fs.rmSync('.next',{recursive:true,force:true}); fs.rmSync('node_modules',{recursive:true,force:true}); try{fs.rmSync('package-lock.json',{force:true});}catch(e){}\"",
+    "reinstall": "npm run reset && npm install",
+    "dev:clean": "npm run clean && next dev",
+    "build:clean": "npm run clean && next build"
   },
   "dependencies": {
     "next": "14.2.5",

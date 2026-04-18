@@ -1,5 +1,6 @@
 {
   "nav": {
+    "home": "Inicio",
     "services": "Servicios",
     "history": "Historia",
     "suite": "Suite BI",
@@ -43,8 +44,8 @@
     "label": "Servicios",
     "headline": "Tres líneas de trabajo.",
     "headline_2": "Un mismo criterio.",
-    "subheadline": "Diseñamos motores inteligentes para hacer crecer negocios: claridad de foco, arquitectura de información y ejecución sobria.",
-    "methodology_footer": "Metodología consultiva · Entregables explícitos y foco en decisiones",
+    "subheadline": "Tres líneas integradas para crecer con menos fricción comercial y operativa: estrategia, arquitectura de información y ejecución medible.",
+    "methodology_footer": "Metodología consultiva · decisiones con impacto real",
     "s1_badge": "Línea 01",
     "s1_title": "Neuroventas",
     "s1_subtitle": "Comportamiento, mensaje y proceso comercial alineados",
@@ -60,7 +61,7 @@
     "s3_subtitle": "BI y software a medida cuando aporta ventaja",
     "s3_desc": "Reporting, alertas y flujos operativos alineados a procesos reales; módulos cuando un ERP genérico no encaja — con trazabilidad, permisos y hoja de ruta de implementación acordada.",
     "s3_features": ["Diseño por procesos y preguntas de negocio", "Reportes y alertas accionables", "Automatización de tareas repetitivas", "Acompañamiento en adopción"],
-    "learn_more": "Ir a contacto"
+    "learn_more": "Hablar sobre esta línea"
   },
   "about": {
     "label": "Cómo pensamos Summer87",
@@ -106,6 +107,9 @@
     "whatsapp_prefill": "Hola, quiero hacer una consulta.",
     "whatsapp_aria": "Abrir WhatsApp para escribir a Summer87",
     "maps_aria": "Abrir la dirección en Google Maps",
+    "email_hint": "Escríbenos directamente",
+    "whatsapp_hint": "Respuesta rápida",
+    "email_action_aria": "Enviar correo electrónico a {email}",
     "waze_label": "Waze",
     "waze_aria": "Abrir la dirección en Waze",
     "email": "hola@summer87.ai",
@@ -115,8 +119,8 @@
     "phone_tel": "+59898260258",
     "address_line1": "World Trade Center Torre 4, piso 40",
     "address_line2": "Montevideo, Uruguay",
-    "cta_email": "Escribir por correo",
-    "cta_whatsapp": "Escribir por WhatsApp"
+    "cta_email": "Contactar por correo",
+    "cta_whatsapp": "Hablar por WhatsApp ahora"
   },
   "footer": {
     "tagline": "Motores inteligentes de negocio: estrategia, datos, IA y operación.",
@@ -126,9 +130,6 @@
     "neuroventas": "Neuroventas",
     "motores": "Motores inteligentes",
     "suite": "Summer87 BI",
-    "history": "Historia",
-    "blog": "Blog",
-    "careers": "Carreras",
     "privacy": "Privacidad",
     "terms": "Términos",
     "cookies": "Cookies",

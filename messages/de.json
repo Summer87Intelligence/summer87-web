@@ -1,5 +1,6 @@
 {
   "nav": {
+    "home": "Start",
     "services": "Leistungen",
     "history": "Hintergrund",
     "suite": "BI Suite",
@@ -13,7 +14,7 @@
     "headline_gradient": "intelligente Business-Motoren",
     "headline_part2": ", damit Unternehmen wachsen.",
     "subheadline": "Wir verbinden Neuroventas, künstliche Intelligenz, Business Intelligence und strategische Perspektive—damit Unternehmen verkaufen, operieren und entscheiden anders denken können.",
-    "cta_primary": "Mit Expert:in sprechen",
+    "cta_primary": "Mit einem Experten sprechen",
     "cta_secondary": "Leistungen ansehen",
     "stat_1_value": "Herkunft",
     "stat_1_label": "Technische und betriebliche Erfahrung; der Name erinnert an Clipper Summer87 und Software für echte Probleme.",
@@ -43,8 +44,8 @@
     "label": "Leistungen",
     "headline": "Drei Arbeitslinien.",
     "headline_2": "Ein gemeinsamer Maßstab.",
-    "subheadline": "Wir gestalten intelligente Business-Motoren für nachhaltiges Wachstum: klarer Fokus, Informationsarchitektur und nüchterne Umsetzung.",
-    "methodology_footer": "Beratungsmethodik · Explizite Deliverables und Fokus auf Entscheidungen",
+    "subheadline": "Drei integrierte Linien für Wachstum mit weniger Reibung in Vertrieb und Betrieb: Strategie, Informationsarchitektur und messbare Umsetzung.",
+    "methodology_footer": "Beratungsmethodik · Entscheidungen mit echter Wirkung",
     "s1_badge": "Linie 01",
     "s1_title": "Neuroventas",
     "s1_subtitle": "Verhalten, Botschaft und Vertriebsprozess im Einklang",
@@ -60,7 +61,7 @@
     "s3_subtitle": "BI und Software nach Maß, wenn sie Hebel schafft",
     "s3_desc": "Reporting, Alerts und operative Abläufe entlang realer Prozesse; Module, wenn ein generisches ERP nicht passt—mit Nachvollziehbarkeit, Rechten und vereinbarter Implementierungs-Roadmap.",
     "s3_features": ["Design entlang von Prozess- und Businessfragen", "Umsetzbare Reports und Alerts", "Automatisierung repetitiver Aufgaben", "Begleitung bei Einführung"],
-    "learn_more": "Zum Kontakt"
+    "learn_more": "Über diese Linie sprechen"
   },
   "about": {
     "label": "So denken wir bei Summer87",
@@ -98,7 +99,7 @@
   },
   "contact": {
     "title": "Kontakt",
-    "subtitle": "Wir sind verfügbar, um darüber zu sprechen, wie wir einen intelligenten Business-Motor für Ihr Unternehmen gestalten können.",
+    "subtitle": "Wir sind verfügbar, um zu besprechen, wie wir einen intelligenten Motor für Ihr Unternehmen gestalten können.",
     "email_label": "E-Mail",
     "web_label": "Web",
     "phone_label": "WhatsApp",
@@ -106,6 +107,9 @@
     "whatsapp_prefill": "Hallo, ich möchte eine Anfrage stellen.",
     "whatsapp_aria": "WhatsApp öffnen, um Summer87 zu schreiben",
     "maps_aria": "Adresse in Google Maps öffnen",
+    "email_hint": "Schreiben Sie uns direkt",
+    "whatsapp_hint": "Schnelle Antwort",
+    "email_action_aria": "E-Mail senden an {email}",
     "waze_label": "Waze",
     "waze_aria": "Adresse in Waze öffnen",
     "email": "hola@summer87.ai",
@@ -115,8 +119,8 @@
     "phone_tel": "+59898260258",
     "address_line1": "World Trade Center, Turm 4, 40. Stock",
     "address_line2": "Montevideo, Uruguay",
-    "cta_email": "E-Mail schreiben",
-    "cta_whatsapp": "Per WhatsApp schreiben"
+    "cta_email": "Per E-Mail kontaktieren",
+    "cta_whatsapp": "Jetzt per WhatsApp sprechen"
   },
   "footer": {
     "tagline": "Intelligente Business-Motoren: Strategie, Daten, KI und Betrieb.",
@@ -126,9 +130,6 @@
     "neuroventas": "Neuroventas",
     "motores": "Intelligente Motoren",
     "suite": "Summer87 BI",
-    "history": "Hintergrund",
-    "blog": "Blog",
-    "careers": "Karriere",
     "privacy": "Datenschutz",
     "terms": "AGB",
     "cookies": "Cookies",

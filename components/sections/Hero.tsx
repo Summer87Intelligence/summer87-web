@@ -1,26 +1,35 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import HeroDepthScene from "@/components/3d/HeroDepthScene";
+import { staggerChildren } from "@/lib/animation/motion";
+import { useReducedMotionSafe } from "@/lib/animation/useReducedMotionSafe";
+import { LANDING_EVENTS, trackLandingEvent } from "@/lib/analytics/tracking";
 
-// Animated background particles
-function ParticleField() {
-  const particles = Array.from({ length: 40 }, (_, i) => ({
-    id: i,
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    delay: `${Math.random() * 8}s`,
-    duration: `${6 + Math.random() * 10}s`,
-    size: Math.random() > 0.7 ? 2 : 1,
-    opacity: 0.1 + Math.random() * 0.3,
-  }));
+function ParticleField({ reduceMotion, isMobile }: { reduceMotion: boolean; isMobile: boolean }) {
+  const particles = useMemo(
+    () =>
+      Array.from({ length: isMobile ? 18 : 34 }, (_, i) => ({
+        id: i,
+        left: `${(i * 17) % 100}%`,
+        top: `${(i * 29) % 100}%`,
+        delay: `${(i % 8) * 0.7}s`,
+        duration: `${7 + (i % 6) * 1.3}s`,
+        size: i % 4 === 0 ? 2 : 1,
+        opacity: 0.08 + (i % 6) * 0.04,
+      })),
+    [isMobile]
+  );
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       {particles.map((p) => (
         <div
           key={p.id}
-          className="absolute rounded-full bg-accent-aqua animate-pulse"
+          className={`absolute rounded-full bg-accent-aqua ${reduceMotion ? "" : "animate-pulse"}`}
           style={{
             left: p.left,
             top: p.top,
@@ -36,129 +45,123 @@ function ParticleField() {
   );
 }
 
-// Data visualization decoration
-function DataNodes() {
-  return (
-    <div className="absolute right-0 top-0 w-1/2 h-full opacity-20 pointer-events-none hidden lg:block">
-      <svg viewBox="0 0 600 700" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        {/* Connection lines */}
-        <g stroke="#17A8FF" strokeWidth="0.5" strokeDasharray="4,8">
-          <line x1="200" y1="100" x2="400" y2="200" />
-          <line x1="400" y1="200" x2="500" y2="350" />
-          <line x1="400" y1="200" x2="300" y2="400" />
-          <line x1="300" y1="400" x2="450" y2="500" />
-          <line x1="300" y1="400" x2="150" y2="500" />
-          <line x1="150" y1="300" x2="300" y2="400" />
-          <line x1="150" y1="300" x2="200" y2="100" />
-          <line x1="500" y1="350" x2="450" y2="500" />
-          <line x1="100" y1="550" x2="150" y2="500" />
-          <line x1="500" y1="600" x2="450" y2="500" />
-        </g>
-        {/* Nodes */}
-        <g fill="#12D9D9">
-          <circle cx="200" cy="100" r="4" opacity="0.8" />
-          <circle cx="400" cy="200" r="6" opacity="1" />
-          <circle cx="500" cy="350" r="4" opacity="0.6" />
-          <circle cx="300" cy="400" r="8" opacity="1" />
-          <circle cx="150" cy="300" r="4" opacity="0.7" />
-          <circle cx="450" cy="500" r="5" opacity="0.8" />
-          <circle cx="150" cy="500" r="3" opacity="0.5" />
-          <circle cx="100" cy="550" r="3" opacity="0.4" />
-          <circle cx="500" cy="600" r="4" opacity="0.6" />
-        </g>
-        {/* Rings around key nodes */}
-        <g fill="none" stroke="#17A8FF" strokeWidth="0.5">
-          <circle cx="400" cy="200" r="16" opacity="0.3" />
-          <circle cx="400" cy="200" r="28" opacity="0.15" />
-          <circle cx="300" cy="400" r="20" opacity="0.3" />
-          <circle cx="300" cy="400" r="35" opacity="0.15" />
-        </g>
-        {/* Labels */}
-        <g fill="#12D9D9" fontSize="9" fontFamily="JetBrains Mono" opacity="0.5">
-          <text x="415" y="198">MOTOR_01</text>
-          <text x="315" y="398">ENGINE_CORE</text>
-          <text x="510" y="348">DATA_IN</text>
-          <text x="165" y="298">SIGNAL_A</text>
-        </g>
-      </svg>
-    </div>
-  );
-}
-
 export default function Hero() {
   const t = useTranslations("hero");
+  const locale = useLocale();
+  const reduceMotion = useReducedMotionSafe();
+  const shouldReduceMotion = Boolean(reduceMotion);
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 1023px)");
+    const sync = () => setIsMobile(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden noise-overlay">
-      {/* Background layers */}
-      <div className="absolute inset-0 bg-surface-gradient" />
-      <div className="absolute inset-0 grid-bg opacity-40" />
-      <div className="absolute inset-0 bg-tech-mesh" />
+    <section
+      id="home"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden noise-overlay premium-depth-bg scroll-mt-28"
+    >
+      <div className="absolute inset-0 bg-surface-gradient" aria-hidden="true" />
+      <div className="absolute inset-0 grid-bg opacity-35" aria-hidden="true" />
+      <div className="absolute inset-0 bg-tech-mesh" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(18,217,217,0.14),transparent_38%),radial-gradient(circle_at_80%_24%,rgba(23,168,255,0.16),transparent_35%),radial-gradient(circle_at_55%_72%,rgba(242,193,78,0.1),transparent_30%)]" aria-hidden="true" />
 
-      {/* Subtle scan line effect */}
-      <div
-        className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-blue/30 to-transparent pointer-events-none"
-        style={{
-          top: "30%",
-          animation: "scanLine 12s ease-in-out infinite",
-        }}
-      />
+      <ParticleField reduceMotion={shouldReduceMotion} isMobile={isMobile} />
+      <HeroDepthScene isMobile={isMobile} />
 
-      {/* Particles */}
-      <ParticleField />
-
-      {/* Data visualization */}
-      <DataNodes />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 w-full">
-        <div className="max-w-3xl">
-
-          {/* Slogan de marca */}
-          <div className="mb-8 flex animate-fade-in justify-center md:justify-start">
-            <p className="max-w-xl text-center font-display text-xl font-bold leading-tight tracking-tight text-tech-gradient md:text-left md:text-2xl lg:text-3xl">
+      <motion.div
+        variants={staggerChildren(0.08, 0.11)}
+        initial={shouldReduceMotion ? undefined : "hidden"}
+        animate={shouldReduceMotion ? undefined : "visible"}
+        className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 lg:pt-[8.75rem] lg:pb-[5.75rem] w-full"
+      >
+        <div className="max-w-3xl xl:max-w-[42.5rem] hero-content-panel">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-28 top-10 hidden h-56 w-56 rounded-full bg-accent-blue/10 blur-3xl md:block"
+          />
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.65 } },
+            }}
+            className="mb-6 lg:mb-[1.55rem] flex justify-center md:justify-start"
+          >
+            <p className="max-w-xl xl:max-w-2xl text-center font-display text-xl font-bold leading-tight tracking-tight text-tech-gradient md:text-left md:text-2xl lg:text-3xl">
               {t("label")}
             </p>
-          </div>
+          </motion.div>
 
-          {/* Headline */}
-          <h1
-            className="font-display font-bold text-4xl sm:text-5xl md:text-5xl lg:text-6xl text-text-primary leading-[1.12] mb-8 animate-fade-up"
-            style={{ animationDelay: "100ms" }}
+          <motion.h1
+            variants={{
+              hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
+              visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.72 } },
+            }}
+            className="hero-headline-refined font-display font-bold text-4xl sm:text-5xl md:text-5xl lg:text-[3.5rem] xl:text-[3.72rem] text-text-primary mb-6 lg:mb-[1.6rem]"
           >
             {t("headline_part1")}
             <span className="text-tech-gradient">{t("headline_gradient")}</span>
             {t("headline_part2")}
-          </h1>
+          </motion.h1>
 
-          {/* Subheadline */}
-          <p
-            className="text-text-secondary text-lg md:text-xl leading-relaxed max-w-2xl mb-10 animate-fade-up"
-            style={{ animationDelay: "400ms" }}
+          <motion.p
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.65 } },
+            }}
+            className="hero-subheadline-refined text-text-secondary text-lg md:text-xl max-w-2xl xl:max-w-[54ch] mb-9 lg:mb-10"
           >
             {t("subheadline")}
-          </p>
+          </motion.p>
 
-          {/* CTAs */}
-          <div
-            className="flex flex-col sm:flex-row gap-4 mb-16 animate-fade-up"
-            style={{ animationDelay: "500ms" }}
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 18 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+            }}
+            className="flex flex-col sm:flex-row gap-4 lg:gap-4 mb-12 lg:mb-[3.15rem]"
           >
-            <a href="#contacto" className="btn-primary">
+            <a
+              href="#contacto"
+              className="btn-primary btn-magnetic"
+              onClick={() =>
+                trackLandingEvent(LANDING_EVENTS.HERO_CTA_PRIMARY_CLICK, {
+                  locale,
+                  cta: "primary",
+                  target: "#contacto",
+                })
+              }
+            >
               <span className="flex items-center gap-2">
                 {t("cta_primary")}
                 <ArrowRight size={16} />
               </span>
             </a>
-            <a href="#services" className="btn-secondary">
+            <a
+              href="#services"
+              className="btn-secondary btn-sheen"
+              onClick={() =>
+                trackLandingEvent(LANDING_EVENTS.HERO_CTA_SECONDARY_CLICK, {
+                  locale,
+                  cta: "secondary",
+                  target: "#services",
+                })
+              }
+            >
               {t("cta_secondary")}
             </a>
-          </div>
+          </motion.div>
 
-          {/* Stats */}
-          <div
-            className="grid grid-cols-3 gap-6 md:gap-12 pt-8 border-t border-brand-border animate-fade-up"
-            style={{ animationDelay: "600ms" }}
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+            }}
+            className="grid grid-cols-3 gap-6 md:gap-9 xl:gap-10 pt-6 lg:pt-[1.7rem] border-t border-brand-border/90"
           >
             {[
               { value: t("stat_1_value"), label: t("stat_1_label") },
@@ -166,7 +169,7 @@ export default function Hero() {
               { value: t("stat_3_value"), label: t("stat_3_label") },
             ].map((stat, i) => (
               <div key={i} className="space-y-1">
-                <div className="font-display text-lg font-semibold leading-tight tracking-tight text-text-primary md:text-xl">
+                <div className="font-display text-lg font-semibold leading-tight tracking-tight text-text-primary md:text-xl stat-number">
                   {stat.value}
                 </div>
                 <div className="text-text-muted text-xs leading-snug">
@@ -174,20 +177,11 @@ export default function Hero() {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-        <span className="text-[10px] font-mono text-text-muted tracking-widest uppercase">
-          Scroll
-        </span>
-        <ChevronDown size={16} className="text-accent-blue animate-bounce" />
-      </div>
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-background to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-background to-transparent pointer-events-none" aria-hidden="true" />
     </section>
   );
 }

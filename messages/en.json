@@ -1,5 +1,6 @@
 {
   "nav": {
+    "home": "Home",
     "services": "Services",
     "history": "Story",
     "suite": "BI Suite",
@@ -13,7 +14,7 @@
     "headline_gradient": "intelligent business engines",
     "headline_part2": " to help organizations grow.",
     "subheadline": "We bring together neuroventas, artificial intelligence, business intelligence, and strategic perspective to change how companies sell, operate, and decide.",
-    "cta_primary": "Talk with an expert",
+    "cta_primary": "Talk to an expert",
     "cta_secondary": "View services",
     "stat_1_value": "Origin",
     "stat_1_label": "Technical and business track record; the name recalls Clipper Summer87 and software built for real problems.",
@@ -43,8 +44,8 @@
     "label": "Services",
     "headline": "Three practice lines.",
     "headline_2": "One standard.",
-    "subheadline": "We design intelligent business engines to help organizations grow: clear focus, information architecture, and sober execution.",
-    "methodology_footer": "Consulting methodology · Explicit deliverables and a decision-first mindset",
+    "subheadline": "Three integrated lines to grow with less commercial and operational friction: strategy, information architecture, and measurable execution.",
+    "methodology_footer": "Consulting methodology · decisions with real impact",
     "s1_badge": "Line 01",
     "s1_title": "Neuroventas",
     "s1_subtitle": "Behavior, narrative, and sales process in sync",
@@ -60,7 +61,7 @@
     "s3_subtitle": "BI and tailored software when it creates leverage",
     "s3_desc": "Reporting, alerts, and operational flows aligned to real processes; modules when a generic ERP does not fit—with traceability, permissions, and an agreed implementation roadmap.",
     "s3_features": ["Design around processes and business questions", "Actionable reports and alerts", "Automation of repetitive tasks", "Adoption support"],
-    "learn_more": "Go to contact"
+    "learn_more": "Talk about this line"
   },
   "about": {
     "label": "How we think at Summer87",
@@ -98,7 +99,7 @@
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "We are available to discuss how to design an intelligent business engine for your organization.",
+    "subtitle": "We are available to discuss how to design an intelligent engine for your business.",
     "email_label": "Email",
     "web_label": "Web",
     "phone_label": "WhatsApp",
@@ -106,6 +107,9 @@
     "whatsapp_prefill": "Hello, I would like to make an inquiry.",
     "whatsapp_aria": "Open WhatsApp to message Summer87",
     "maps_aria": "Open the address in Google Maps",
+    "email_hint": "Write to us directly",
+    "whatsapp_hint": "Quick reply",
+    "email_action_aria": "Send an email to {email}",
     "waze_label": "Waze",
     "waze_aria": "Open the address in Waze",
     "email": "hola@summer87.ai",
@@ -115,8 +119,8 @@
     "phone_tel": "+59898260258",
     "address_line1": "World Trade Center Tower 4, floor 40",
     "address_line2": "Montevideo, Uruguay",
-    "cta_email": "Email us",
-    "cta_whatsapp": "Message on WhatsApp"
+    "cta_email": "Contact by email",
+    "cta_whatsapp": "Talk on WhatsApp now"
   },
   "footer": {
     "tagline": "Intelligent business engines: strategy, data, AI, and operations.",
@@ -126,9 +130,6 @@
     "neuroventas": "Neuroventas",
     "motores": "Intelligent engines",
     "suite": "Summer87 BI",
-    "history": "Story",
-    "blog": "Blog",
-    "careers": "Careers",
     "privacy": "Privacy",
     "terms": "Terms",
     "cookies": "Cookies",

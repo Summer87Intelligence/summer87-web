@@ -17,3 +17,16 @@ pnpm-debug.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.env.*.local
+
+# output / tooling
+dist/
+build/
+coverage/
+
+# os / logs
+.DS_Store
+*.log
+
+# typescript
+*.tsbuildinfo

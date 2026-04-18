@@ -49,13 +49,13 @@ export default function OriginSection() {
   return (
     <section
       id="origin"
-      className="relative overflow-hidden border-t border-brand-border bg-brand-surface1 scroll-mt-28"
+      className="section-shell relative overflow-hidden border-t border-brand-border bg-brand-surface1 scroll-mt-28"
       aria-labelledby="origin-heading"
     >
       <div className="pointer-events-none absolute inset-0 bg-tech-mesh opacity-40" />
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.12]" />
 
-      <div className="relative z-10 mx-auto max-w-3xl px-6 py-24 md:py-32 lg:py-36">
+      <div className="relative z-10 mx-auto max-w-3xl px-6 py-24 text-center md:py-[7.25rem] lg:py-[8rem]">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -63,11 +63,11 @@ export default function OriginSection() {
           variants={stagger}
           className="flex flex-col gap-8 md:gap-10"
         >
-          <motion.div variants={fadeUp} className="space-y-5">
+          <motion.div variants={fadeUp} className="space-y-[1.125rem]">
             <p className="section-label text-[10px] md:text-xs">{t("label")}</p>
             <h2
               id="origin-heading"
-              className="font-display text-3xl font-bold tracking-tight text-text-primary md:text-4xl lg:text-5xl"
+              className="section-headline-refined font-display text-3xl font-bold tracking-tight text-text-primary md:text-4xl lg:text-5xl"
             >
               {t("title")}
             </h2>
@@ -81,7 +81,7 @@ export default function OriginSection() {
             <button
               type="button"
               onClick={() => setExpanded((v) => !v)}
-              className="inline-flex items-center gap-2 text-sm font-medium text-accent-pastel underline decoration-accent-pastel/40 underline-offset-4 transition-colors hover:text-accent-yellow hover:decoration-accent-yellow/60 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent-yellow/70"
+              className="mx-auto inline-flex items-center gap-2 text-sm font-medium text-accent-pastel underline decoration-accent-pastel/40 underline-offset-4 transition-colors hover:text-accent-yellow hover:decoration-accent-yellow/60 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent-yellow/70"
               aria-expanded={expanded}
               aria-controls="origin-expanded-content"
             >
@@ -132,7 +132,6 @@ export default function OriginSection() {
                       {t("signature_name")}
                     </p>
                     <p className="text-sm text-white/60">{t("signature_role")}</p>
-                    <p className="mt-1 text-xs text-white/40">{t("signature_date")}</p>
                   </motion.div>
                 </div>
               </motion.div>

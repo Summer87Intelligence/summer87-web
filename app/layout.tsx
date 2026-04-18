@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
@@ -18,15 +19,15 @@ export const metadata: Metadata = {
     "Clipper Summer87",
     "motores inteligentes de negocio",
   ],
-  authors: [{ name: "Summer87", url: "https://summer87.ai" }],
+  authors: [{ name: "Summer87", url: SITE_URL }],
   creator: "Summer87",
   publisher: "Summer87",
-  metadataBase: new URL("https://summer87.ai"),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     type: "website",
     locale: "es_ES",
     alternateLocale: ["en_US", "de_DE"],
-    url: "https://summer87.ai",
+    url: SITE_URL,
     siteName: "Summer87",
     title: "Summer87 — Intelligent Business Engines",
     description:
@@ -74,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

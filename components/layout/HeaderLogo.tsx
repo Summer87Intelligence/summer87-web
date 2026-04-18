@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/navigation";
 
 interface HeaderLogoProps {
   slogan: string;
@@ -16,6 +16,7 @@ export default function HeaderLogo({ slogan }: HeaderLogoProps) {
         alt="Summer87 Intelligence"
         width={480}
         height={120}
+        sizes="(max-width: 768px) 180px, (max-width: 1024px) 240px, 320px"
         priority
         className="h-12 w-auto shrink-0 object-contain md:h-16 lg:h-20"
       />
