@@ -171,7 +171,7 @@ export default function Hero() {
             className="pointer-events-none flex w-full shrink-0 justify-center lg:-translate-y-1.5 xl:-translate-y-1"
             aria-hidden="true"
           >
-            <div className="flex h-[min(88vw,340px)] w-[min(88vw,340px)] max-h-[340px] max-w-[340px] items-center justify-center overflow-visible sm:max-h-[360px] sm:max-w-[360px] lg:h-[300px] lg:w-[300px] lg:max-h-[300px] lg:max-w-[300px] xl:h-[312px] xl:w-[312px] xl:max-h-[312px] xl:max-w-[312px]">
+            <div className="flex w-full max-w-[min(100%,540px)] items-center justify-center overflow-visible">
               <HeroNavigator />
             </div>
           </div>
