@@ -1,15 +1,24 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useTranslations } from "next-intl";
 import { Brain, Cpu, BarChart3, Check, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useReducedMotionSafe } from "@/lib/animation/useReducedMotionSafe";
 import Reveal from "@/components/motion/Reveal";
 import TiltCard from "@/components/motion/TiltCard";
 
+/** Outer wrapper only — CSS keyframes; inner panel + TiltCard stay separate transform layers */
+const SERVICE_CARD_FLOAT_AMBIENT = [
+  { duration: 7.5, delay: 0 },
+  { duration: 8.2, delay: 0.85 },
+  { duration: 7.8, delay: 1.45 },
+] as const;
+
 const SERVICE_ICONS = [
   { icon: Brain, color: "from-accent-aqua/25 to-accent-blue/10", border: "border-accent-aqua/25", glow: "rgba(18,217,217,0.18)" },
-  { icon: Cpu, color: "from-accent-blue/25 to-accent-aqua/10", border: "border-accent-blue/25", glow: "rgba(23,168,255,0.18)" },
-  { icon: BarChart3, color: "from-premium-400/16 to-premium-300/8", border: "border-premium-400/22", glow: "rgba(242,193,78,0.18)" },
+  { icon: Cpu, color: "from-accent-aqua/25 to-accent-blue/10", border: "border-accent-aqua/25", glow: "rgba(18,217,217,0.18)" },
+  { icon: BarChart3, color: "from-accent-aqua/25 to-accent-blue/10", border: "border-accent-aqua/25", glow: "rgba(18,217,217,0.18)" },
 ];
 
 interface ServiceCardProps {
@@ -33,13 +42,11 @@ function ServiceCard({
     <TiltCard
       id={anchorId}
       className={cn(
-        "group relative h-full min-h-[30.5rem] rounded-2xl p-7 md:min-h-[32rem] md:p-[1.9rem] glass-card transition-all duration-500 cursor-pointer scroll-mt-28 premium-card-shadow",
-        featured && "ring-1 ring-accent-aqua/40 shadow-aqua-md"
+        "group relative h-full min-h-[30.5rem] rounded-2xl p-6 md:min-h-[32rem] md:p-6 glass-card transition-all duration-500 cursor-pointer scroll-mt-24 premium-card-shadow",
+        "ring-1 ring-accent-aqua/40 shadow-aqua-md"
       )}
       style={{
-        background: featured
-          ? "linear-gradient(135deg, rgba(16,16,16,0.96) 0%, rgba(10,10,10,0.82) 100%)"
-          : undefined,
+        background: "linear-gradient(135deg, rgba(16,16,16,0.96) 0%, rgba(10,10,10,0.82) 100%)",
       }}
     >
       <div className="flex h-full flex-col">
@@ -107,6 +114,7 @@ function ServiceCard({
 export default function Services() {
   const t = useTranslations("services");
   const methodologyFooter = t("methodology_footer");
+  const reduceMotion = useReducedMotionSafe();
 
   const services: ServiceCardProps[] = [
     {
@@ -141,39 +149,74 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="section-shell relative py-32 md:py-[7.75rem] lg:py-[8.15rem] overflow-hidden scroll-mt-28">
-      {/* Background */}
-      <div className="absolute inset-0 bg-brand-surface2" />
-      <div className="absolute inset-0 dots-bg opacity-40" />
+    <section id="servicios" className="section-shell relative py-16 md:py-20 overflow-hidden scroll-mt-24">
+      {/* Base */}
+      <div className="absolute inset-0 z-0 bg-brand-surface2" />
+
+      <div className="pointer-events-none absolute inset-0 z-[1]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.10),rgba(0,0,0,0.9)_70%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(34,211,238,0.05),transparent)]" />
+        <div
+          className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-repeat [background-size:256px_256px]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+          }}
+          aria-hidden
+        />
+      </div>
+
+      <div className="absolute inset-0 z-[2] dots-bg opacity-40" />
 
       {/* Radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-accent-blue/5 blur-3xl pointer-events-none" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 z-[2] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-accent-blue/5 blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
-        <Reveal className="text-center max-w-3xl mx-auto mb-[3.75rem] md:mb-16">
+        <Reveal className="text-center max-w-3xl mx-auto mb-10">
           <div className="flex justify-center mb-5">
             <div className="section-label">{t("label")}</div>
           </div>
-          <h2 className="section-headline-refined font-display font-bold text-4xl md:text-5xl text-text-primary mb-4">
+          <h2 className="section-headline-refined font-display font-bold text-4xl md:text-5xl text-text-primary mb-0">
             {t("headline")}{" "}
             <span className="text-tech-gradient">{t("headline_2")}</span>
           </h2>
-          <p className="section-copy-refined mx-auto text-text-secondary text-lg leading-relaxed">
+          <p className="section-copy-refined mx-auto mt-4 text-text-secondary text-lg leading-relaxed">
             {t("subheadline")}
           </p>
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-          {services.map((service, i) => (
-            <Reveal key={i} delay={i * 0.08} className="h-full">
-              <ServiceCard {...service} />
-            </Reveal>
-          ))}
+          {services.map((service, i) => {
+            const cfg = SERVICE_CARD_FLOAT_AMBIENT[i];
+            const floatOn = !reduceMotion;
+            const floatStyle = floatOn
+              ? ({
+                  ["--scf-duration" as string]: `${cfg.duration}s`,
+                  ["--scf-delay" as string]: `${cfg.delay}s`,
+                } as CSSProperties)
+              : undefined;
+
+            return (
+              <div
+                key={i}
+                className={cn(
+                  "service-card-float-ambient h-full min-h-0",
+                  floatOn && "service-card-float-ambient--on"
+                )}
+                style={floatStyle}
+              >
+                <div className="service-card-float-ambient-inner">
+                  <Reveal delay={i * 0.08} className="h-full">
+                    <ServiceCard {...service} />
+                  </Reveal>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         <Reveal
-          className="mt-14 flex w-full justify-center md:mt-[3.7rem] md:mb-1"
+          className="mt-10 flex w-full justify-center md:mb-1"
           delay={0.2}
         >
           <div

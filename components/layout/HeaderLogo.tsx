@@ -9,7 +9,7 @@ export default function HeaderLogo({ slogan }: HeaderLogoProps) {
   return (
     <Link
       href="/"
-      className="flex min-w-0 max-w-[min(100%,22rem)] flex-col items-center gap-1.5 sm:max-w-none md:h-20 md:flex-row md:items-center md:gap-3"
+      className="flex min-w-0 max-w-[min(100%,22rem)] flex-col items-center gap-1.5 sm:max-w-none md:h-16 md:flex-row md:items-center md:gap-3"
     >
       <Image
         src="/summer87.png"
@@ -18,7 +18,7 @@ export default function HeaderLogo({ slogan }: HeaderLogoProps) {
         height={120}
         sizes="(max-width: 768px) 180px, (max-width: 1024px) 240px, 320px"
         priority
-        className="h-12 w-auto shrink-0 object-contain md:h-16 lg:h-20"
+        className="h-12 w-auto shrink-0 object-contain md:h-14 lg:h-16"
       />
 
       <div className="flex min-w-0 flex-col items-center text-center md:items-start md:text-left">

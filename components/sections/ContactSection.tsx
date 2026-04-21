@@ -1,6 +1,6 @@
 "use client";
 
-import type { ComponentType, ReactNode } from "react";
+import type { ComponentType, KeyboardEvent, ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { MapPinned } from "lucide-react";
 import Reveal from "@/components/motion/Reveal";
@@ -14,11 +14,11 @@ function buildGoogleMapsHref(query: string) {
 
 /** Subject + body fijos para conversión (formato acordado) */
 const CONTACT_MAILTO_HREF =
-  "mailto:hola@summer87.ai?subject=Consulta%20sobre%20Summer87&body=Hola%2C%20quiero%20conversar%20sobre%20Summer87%20y%20sus%20servicios.";
+  "mailto:hola@summer87.ai";
 
 /** Mensaje precargado en WhatsApp (formato acordado) */
 const CONTACT_WHATSAPP_HREF =
-  "https://wa.me/59898260258?text=Hola%2C%20quiero%20conversar%20sobre%20Summer87%20y%20c%C3%B3mo%20pueden%20ayudarme%20con%20mi%20negocio.";
+  "https://wa.me/59898260258";
 
 const cardLinkFocus =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-aqua/80";
@@ -71,6 +71,24 @@ export default function ContactSection() {
   const email = t("email");
   const mapsQuery = `${t("address_line1")}, ${t("address_line2")}`;
   const googleMapsHref = buildGoogleMapsHref(mapsQuery);
+  const contactMailtoHref =
+    "mailto:hola@summer87.ai?subject=" +
+    encodeURIComponent("Interés en Summer87") +
+    "&body=" +
+    encodeURIComponent("Hola, estoy interesado en Summer87 y me gustaría recibir más información.");
+
+  const handleMailCardActivate = () => {
+    const selectedText = window.getSelection?.()?.toString()?.trim();
+    if (selectedText) return;
+    window.location.href = contactMailtoHref;
+  };
+
+  const handleMailCardKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleMailCardActivate();
+    }
+  };
 
   type CardConfig = {
     key: string;
@@ -84,6 +102,7 @@ export default function ContactSection() {
     iconClassName?: string;
     ariaLabel: string;
     onTrack: () => void;
+    value?: string;
     body?: ReactNode;
   };
 
@@ -93,6 +112,7 @@ export default function ContactSection() {
       href: CONTACT_MAILTO_HREF,
       external: false,
       label: t("email_label"),
+      value: "hola@summer87.ai",
       icon: ContactIconMail,
       ariaLabel: t("email_action_aria", { email }),
       onTrack: () =>
@@ -106,6 +126,7 @@ export default function ContactSection() {
       href: CONTACT_WHATSAPP_HREF,
       external: true,
       label: t("phone_label"),
+      value: t("phone_display"),
       icon: ContactIconWhatsApp,
       iconClassName: "text-[#25D366] group-hover:border-emerald-400/35 group-hover:text-[#3fe07a]",
       ariaLabel: t("whatsapp_aria"),
@@ -128,7 +149,7 @@ export default function ContactSection() {
           provider: "google_maps",
         }),
       body: (
-        <div className="mt-4 max-w-[17.5rem] text-sm leading-relaxed text-white/75">
+        <div className="mt-3 max-w-[17.5rem] text-sm leading-relaxed text-white/75">
           <span className="block text-text-primary/90">{t("address_line1")}</span>
           <span className="mt-1.5 block text-white/70">{t("address_line2")}</span>
         </div>
@@ -139,22 +160,22 @@ export default function ContactSection() {
   return (
     <section
       id="contacto"
-      className="section-shell relative border-t border-white/10 bg-brand-background py-24 md:py-[7rem] lg:py-[8.25rem] overflow-hidden scroll-mt-28"
+      className="section-shell relative border-t border-white/10 bg-brand-background py-16 md:py-20 overflow-hidden scroll-mt-24"
     >
       <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
-        <Reveal className="max-w-3xl mx-auto text-center mb-16 md:mb-[4.75rem] lg:mb-[5.5rem]">
-          <h2 className="section-headline-refined font-display font-bold text-3xl md:text-4xl text-text-primary tracking-tight mb-4">
+        <Reveal className="max-w-3xl mx-auto text-center mb-10">
+          <h2 className="section-headline-refined font-display font-bold text-3xl md:text-4xl text-text-primary tracking-tight mb-0">
             {t("title")}
           </h2>
-          <p className="section-copy-refined mx-auto max-w-xl text-base md:text-lg text-white/70 leading-relaxed">
+          <p className="section-copy-refined mx-auto mt-3 max-w-xl text-base md:text-lg text-white/70 leading-relaxed">
             {t("subtitle")}
           </p>
-          <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
+          <div className="mx-auto mt-3 h-px w-24 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
         </Reveal>
 
-        <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 items-stretch">
+        <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-6 md:grid-cols-3 items-stretch">
           {cards.map((card, i) => {
             const Icon = card.icon;
             const iconWrap = cn(
@@ -165,7 +186,7 @@ export default function ContactSection() {
             );
 
             const tiltShell = cn(
-              "group relative flex h-full min-h-[220px] flex-col overflow-hidden rounded-2xl",
+              "group relative flex h-full min-h-[210px] flex-col overflow-hidden rounded-2xl",
               "glass-card transition-all duration-500 premium-card-shadow",
               "border-white/10 hover:border-accent-aqua/30"
             );
@@ -183,29 +204,66 @@ export default function ContactSection() {
 
             return (
               <Reveal key={card.key} delay={i * 0.06}>
-                <TiltCard intensity={5} className={tiltShell}>
-                  <a
-                    href={card.href}
-                    aria-label={card.ariaLabel}
-                    {...(card.external || card.newTab
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                    onClick={card.onTrack}
-                    className={cn(
-                      "relative z-[1] flex min-h-[220px] flex-1 flex-col items-center justify-center px-5 py-8 text-center sm:px-6 md:min-h-[240px] md:px-7 md:py-9",
-                      "rounded-2xl transition-colors duration-300",
-                      "hover:bg-white/[0.03]",
-                      cardLinkFocus
-                    )}
+                {card.key === "email" ? (
+                  <div
+                    role="link"
+                    tabIndex={0}
+                    aria-label="Enviar correo a hola@summer87.ai"
+                    onClick={() => {
+                      card.onTrack();
+                      handleMailCardActivate();
+                    }}
+                    onKeyDown={handleMailCardKeyDown}
+                    className={cn("block h-full w-full cursor-pointer", cardLinkFocus)}
                   >
-                    <span className={iconWrap} aria-hidden>
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <p className="text-xs font-mono uppercase tracking-widest text-text-muted">{card.label}</p>
-                    {card.body}
-                  </a>
-                  {glow}
-                </TiltCard>
+                    <TiltCard intensity={5} className={tiltShell}>
+                      <div
+                        className={cn(
+                          "relative z-[1] flex h-full w-full min-h-[210px] flex-1 flex-col items-center justify-center px-5 py-6 text-center sm:px-6 md:min-h-[220px] md:px-6 md:py-7",
+                          "rounded-2xl transition-colors duration-300",
+                          "hover:bg-white/[0.03]"
+                        )}
+                      >
+                        <span className={iconWrap} aria-hidden>
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <p className="text-xs font-mono uppercase tracking-widest text-text-muted">{card.label}</p>
+                        {card.value ? (
+                          <p className="mt-2 select-text text-base font-medium leading-tight text-text-primary">{card.value}</p>
+                        ) : null}
+                        {card.body}
+                      </div>
+                      {glow}
+                    </TiltCard>
+                  </div>
+                ) : (
+                  <TiltCard intensity={5} className={tiltShell}>
+                    <a
+                      href={card.href}
+                      aria-label={card.ariaLabel}
+                      {...(card.external || card.newTab
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      onClick={card.onTrack}
+                      className={cn(
+                        "relative z-[1] flex h-full w-full min-h-[210px] flex-1 flex-col items-center justify-center px-5 py-6 text-center sm:px-6 md:min-h-[220px] md:px-6 md:py-7",
+                        "rounded-2xl transition-colors duration-300",
+                        "hover:bg-white/[0.03]",
+                        cardLinkFocus
+                      )}
+                    >
+                      <span className={iconWrap} aria-hidden>
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <p className="text-xs font-mono uppercase tracking-widest text-text-muted">{card.label}</p>
+                      {card.value ? (
+                        <p className="mt-2 text-base font-medium leading-tight text-text-primary">{card.value}</p>
+                      ) : null}
+                      {card.body}
+                    </a>
+                    {glow}
+                  </TiltCard>
+                )}
               </Reveal>
             );
           })}

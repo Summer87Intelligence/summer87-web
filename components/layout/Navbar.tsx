@@ -26,32 +26,58 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = ["home", "origin", "services", "contacto"];
+    const sectionIds = ["home", "origin", "servicios", "contacto"] as const;
+    type SectionId = (typeof sectionIds)[number];
 
-    const syncActiveSection = () => {
-      const viewportAnchor = window.innerHeight * 0.26;
-      let current = "";
+    const isSectionId = (id: string): id is SectionId =>
+      (sectionIds as readonly string[]).includes(id);
 
-      for (const id of sectionIds) {
-        const section = document.getElementById(id);
-        if (!section) continue;
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= viewportAnchor && rect.bottom > viewportAnchor) {
-          current = id;
-          break;
-        }
+    const syncFromHash = () => {
+      const raw = window.location.hash.replace(/^#/, "");
+      if (raw && isSectionId(raw)) {
+        setActiveSection(raw);
       }
-
-      setActiveSection(current);
     };
 
-    syncActiveSection();
-    window.addEventListener("scroll", syncActiveSection, { passive: true });
-    window.addEventListener("resize", syncActiveSection);
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (elements.length === 0) {
+      syncFromHash();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting && e.intersectionRatio > 0);
+        if (visible.length === 0) return;
+
+        visible.sort((a, b) => {
+          const d = b.intersectionRatio - a.intersectionRatio;
+          if (Math.abs(d) > 0.001) return d;
+          return a.target.getBoundingClientRect().top - b.target.getBoundingClientRect().top;
+        });
+
+        const id = visible[0].target.id;
+        if (isSectionId(id)) setActiveSection(id);
+      },
+      {
+        root: null,
+        rootMargin: "-80px 0px -55% 0px",
+        threshold: [0, 0.15, 0.35, 0.5, 0.65, 0.85, 1],
+      }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
 
     return () => {
-      window.removeEventListener("scroll", syncActiveSection);
-      window.removeEventListener("resize", syncActiveSection);
+      window.removeEventListener("hashchange", syncFromHash);
+      elements.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
     };
   }, []);
 
@@ -85,7 +111,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "#home", label: t("home") },
     { href: "#origin", label: t("history") },
-    { href: "#services", label: t("services") },
+    { href: "#servicios", label: t("services") },
     { href: "#contacto", label: t("contact") },
   ];
 
@@ -94,8 +120,8 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         scrolled
-          ? "py-2 bg-brand-background/90 backdrop-blur-xl"
-          : "py-5 bg-transparent"
+          ? "py-1.5 md:py-2 bg-brand-background/90 backdrop-blur-xl"
+          : "py-2.5 md:py-3 bg-transparent"
       )}
     >
       <div
@@ -196,7 +222,11 @@ export default function Navbar() {
               key={`${link.href}-${link.label}`}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="block text-sm text-text-secondary hover:text-accent-pastel transition-colors py-2 font-medium"
+              aria-current={activeSection === link.href.slice(1) ? "page" : undefined}
+              className={cn(
+                "nav-link-premium block py-2 text-sm",
+                activeSection === link.href.slice(1) && "nav-link-premium-active"
+              )}
             >
               {link.label}
             </a>

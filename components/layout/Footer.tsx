@@ -10,9 +10,9 @@ export default function Footer() {
 
   const links = {
     services: [
-      { label: t("neuroventas"), href: "#services" },
-      { label: t("motores"), href: "#services" },
-      { label: t("suite"), href: "#services" },
+      { label: t("neuroventas"), href: "#servicios" },
+      { label: t("motores"), href: "#servicios" },
+      { label: t("suite"), href: "#servicios" },
     ],
     company: [
       { label: tNav("home"), href: "#home" },

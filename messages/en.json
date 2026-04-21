@@ -25,7 +25,23 @@
     "scroll_indicator_label": "Go to the next section",
     "micro_bullet_1": "Spot opportunities",
     "micro_bullet_2": "Prioritize actions",
-    "micro_bullet_3": "Activate decisions"
+    "micro_bullet_3": "Activate decisions",
+    "heroPanel": {
+      "line1": {
+        "label": "LINE 01",
+        "title": "Neurosales"
+      },
+      "line2": {
+        "label": "LINE 02",
+        "title": "Intelligent business engines"
+      },
+      "line3": {
+        "label": "LINE 03",
+        "title": "Summer87 Business Intelligence"
+      },
+      "cta": "View more",
+      "aside_aria": "Summer87 service lines"
+    }
   },
   "origin": {
     "label": "The origin of Summer87",

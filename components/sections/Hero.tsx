@@ -7,9 +7,7 @@ import { staggerChildren } from "@/lib/animation/motion";
 import { useReducedMotionSafe } from "@/lib/animation/useReducedMotionSafe";
 import { LANDING_EVENTS, trackLandingEvent } from "@/lib/analytics/tracking";
 import HeroOceStats from "@/components/hero/HeroOceStats";
-import HeroVisualMicroBullets from "@/components/hero/HeroVisualMicroBullets";
-import ScrollIndicator from "@/components/hero/ScrollIndicator";
-import HeroNavigator from "@/components/hero/HeroNavigator";
+import HeroServiceCards from "@/components/hero/HeroServiceCards";
 
 function HeroDataNetworkLayer() {
   return (
@@ -53,7 +51,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden noise-overlay scroll-mt-28 bg-[#050A0E]"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden noise-overlay scroll-mt-24 bg-[#050A0E]"
     >
       <div className="absolute inset-0 z-0 bg-[#050A0E]" aria-hidden="true" />
       <div
@@ -80,7 +78,7 @@ export default function Hero() {
       <HeroDataNetworkLayer />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-20 lg:pt-[8.75rem] lg:pb-24">
-        <div className="grid w-full grid-cols-1 gap-10 md:gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] lg:items-start lg:gap-8 xl:gap-10 lg:pb-12">
+        <div className="grid w-full grid-cols-1 gap-10 md:gap-12 lg:grid-cols-[minmax(0,6.8fr)_minmax(0,3.2fr)] lg:items-start lg:gap-10 xl:gap-12 lg:pb-8">
         <motion.div
           variants={staggerChildren(0.08, 0.11)}
           initial={shouldReduceMotion ? undefined : "hidden"}
@@ -150,13 +148,13 @@ export default function Hero() {
               </span>
             </a>
             <a
-              href="#services"
+              href="#servicios"
               className="btn-secondary btn-sheen"
               onClick={() =>
                 trackLandingEvent(LANDING_EVENTS.HERO_CTA_SECONDARY_CLICK, {
                   locale,
                   cta: "secondary",
-                  target: "#services",
+                  target: "#servicios",
                 })
               }
             >
@@ -166,27 +164,17 @@ export default function Hero() {
         </div>
         </motion.div>
 
-        <div className="relative z-[5] mt-10 hidden w-full min-w-0 flex-col items-center self-start overflow-visible lg:mt-0 lg:flex lg:pr-2 xl:pr-4">
-          <div
-            className="pointer-events-none flex w-full shrink-0 justify-center lg:-translate-y-1.5 xl:-translate-y-1"
-            aria-hidden="true"
-          >
-            <div className="flex w-full max-w-[min(100%,540px)] items-center justify-center overflow-visible">
-              <HeroNavigator />
-            </div>
-          </div>
-          <div className="mt-7 w-full min-w-0 shrink-0 px-0.5">
-            <HeroVisualMicroBullets />
+        <div className="relative z-[5] mt-2 w-full min-w-0 items-start justify-center self-start md:mt-1 md:flex lg:mt-0 lg:pl-1">
+          <div className="w-full max-w-[35rem] opacity-[0.86] md:scale-[0.99] lg:scale-100">
+            <HeroServiceCards />
           </div>
         </div>
         </div>
 
-        <div className="mt-8 w-full min-w-0 lg:mt-10">
+        <div className="mt-5 w-full min-w-0 lg:mt-6">
           <HeroOceStats variant="band" />
         </div>
       </div>
-
-      <ScrollIndicator />
 
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-background to-transparent pointer-events-none" aria-hidden="true" />
     </section>

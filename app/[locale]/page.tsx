@@ -8,6 +8,7 @@ import Hero from "@/components/sections/Hero";
 import OriginSection from "@/components/sections/OriginSection";
 import Services from "@/components/sections/Services";
 import ContactSection from "@/components/sections/ContactSection";
+import BackgroundCircuits from "@/components/background/BackgroundCircuits";
 import { locales } from "@/i18n";
 import ScrollDepthTracker from "@/components/analytics/ScrollDepthTracker";
 import { SITE_URL } from "@/lib/site";
@@ -131,6 +132,7 @@ export default async function HomePage({ params: { locale } }: PageProps) {
 
   return (
     <main className="relative">
+      <BackgroundCircuits />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}

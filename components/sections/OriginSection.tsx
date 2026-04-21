@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
+import { useReducedMotionSafe } from "@/lib/animation/useReducedMotionSafe";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -42,15 +43,29 @@ const expandMotion = {
   },
 };
 
+const originSectionEntrance = {
+  rest: { opacity: 0, y: 16 },
+  enter: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+  },
+} as const;
+
 export default function OriginSection() {
   const t = useTranslations("origin");
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
+  const reduceMotion = useReducedMotionSafe();
 
   return (
-    <section
+    <motion.section
       id="origin"
-      className="section-shell relative overflow-hidden border-t border-brand-border bg-brand-surface1 scroll-mt-28"
+      className="section-shell relative overflow-hidden border-t border-brand-border bg-brand-surface1 scroll-mt-24"
       aria-labelledby="origin-heading"
+      initial={reduceMotion ? false : "rest"}
+      whileInView={reduceMotion ? undefined : "enter"}
+      viewport={{ once: true, amount: 0.2 }}
+      variants={reduceMotion ? undefined : originSectionEntrance}
     >
       <div className="pointer-events-none absolute inset-0 bg-tech-mesh opacity-40" />
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.12]" />
@@ -59,7 +74,7 @@ export default function OriginSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.2 }}
           variants={stagger}
           className="flex flex-col gap-8 md:gap-10"
         >
@@ -139,6 +154,6 @@ export default function OriginSection() {
           </AnimatePresence>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

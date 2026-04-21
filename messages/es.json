@@ -25,7 +25,23 @@
     "scroll_indicator_label": "Ir a la siguiente sección",
     "micro_bullet_1": "Detecta oportunidades",
     "micro_bullet_2": "Prioriza acciones",
-    "micro_bullet_3": "Activa decisiones"
+    "micro_bullet_3": "Activa decisiones",
+    "heroPanel": {
+      "line1": {
+        "label": "LÍNEA 01",
+        "title": "Neuroventas"
+      },
+      "line2": {
+        "label": "LÍNEA 02",
+        "title": "Motores inteligentes de negocio"
+      },
+      "line3": {
+        "label": "LÍNEA 03",
+        "title": "Summer87 Business Intelligence"
+      },
+      "cta": "Ver más",
+      "aside_aria": "Líneas de servicio Summer87"
+    }
   },
   "origin": {
     "label": "El origen de Summer87",

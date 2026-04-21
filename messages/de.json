@@ -25,7 +25,23 @@
     "scroll_indicator_label": "Zum nächsten Abschnitt",
     "micro_bullet_1": "Chancen erkennen",
     "micro_bullet_2": "Aktionen priorisieren",
-    "micro_bullet_3": "Entscheidungen aktivieren"
+    "micro_bullet_3": "Entscheidungen aktivieren",
+    "heroPanel": {
+      "line1": {
+        "label": "LINIE 01",
+        "title": "Neurovertrieb"
+      },
+      "line2": {
+        "label": "LINIE 02",
+        "title": "Intelligente Geschäftsmodelle"
+      },
+      "line3": {
+        "label": "LINIE 03",
+        "title": "Summer87 Business Intelligence"
+      },
+      "cta": "Mehr sehen",
+      "aside_aria": "Summer87 Leistungslinien"
+    }
   },
   "origin": {
     "label": "Der Ursprung von Summer87",

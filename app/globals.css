@@ -369,9 +369,9 @@ body {
     position: absolute;
     inset: -18px -20px -22px -20px;
     border-radius: 28px;
-    border: 1px solid rgba(23, 168, 255, 0.14);
-    background: linear-gradient(145deg, rgba(10, 10, 10, 0.55), rgba(10, 10, 10, 0.12));
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    background: linear-gradient(135deg, #081822 0%, #071f2c 55%, #020617 100%);
+    box-shadow: inset 0 1px 0 rgba(34, 211, 238, 0.1), 0 0 60px rgba(34, 211, 238, 0.18);
     pointer-events: none;
     z-index: -1;
   }
@@ -379,11 +379,9 @@ body {
   .hero-content-panel::after {
     content: "";
     position: absolute;
-    left: -24px;
-    top: 64px;
-    width: 2px;
-    height: 120px;
-    background: linear-gradient(180deg, rgba(18, 217, 217, 0.8), rgba(23, 168, 255, 0.2), transparent);
+    inset: -18px -20px -22px -20px;
+    border-radius: 28px;
+    background: radial-gradient(circle at 30% 30%, rgba(34, 211, 238, 0.08), transparent 65%);
     pointer-events: none;
     z-index: -1;
   }
@@ -465,6 +463,79 @@ body {
   .transition-tech {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  .bg-circuit-fade-mask {
+    background:
+      radial-gradient(ellipse at 28% 24%, rgba(5, 10, 16, 0.92) 0%, rgba(5, 10, 16, 0.74) 36%, rgba(5, 10, 16, 0.28) 68%, transparent 86%),
+      radial-gradient(ellipse at 78% 62%, rgba(5, 10, 16, 0.55) 0%, rgba(5, 10, 16, 0.2) 54%, transparent 80%);
+  }
+
+  .circuit-drift-slow {
+    animation: circuitDriftSlow 28s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  .circuit-drift-reverse {
+    animation: circuitDriftReverse 34s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  .circuit-node-pulse {
+    animation: circuitNodePulse 18s ease-in-out infinite;
+  }
+
+  .circuit-node-pulse.delay-1 { animation-delay: 1.6s; }
+  .circuit-node-pulse.delay-2 { animation-delay: 3.2s; }
+  .circuit-node-pulse.delay-3 { animation-delay: 4.8s; }
+  .circuit-node-pulse.delay-4 { animation-delay: 6.4s; }
+  .circuit-node-pulse.delay-5 { animation-delay: 8s; }
+  .circuit-node-pulse.delay-6 { animation-delay: 9.6s; }
+}
+
+@keyframes circuitDriftSlow {
+  0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.2; }
+  50% { transform: translate3d(-10px, 8px, 0); opacity: 0.26; }
+}
+
+@keyframes circuitDriftReverse {
+  0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.12; }
+  50% { transform: translate3d(10px, -6px, 0); opacity: 0.17; }
+}
+
+@keyframes circuitNodePulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+/* Services grid: outer shell float only — inner panel stays a stable compositing layer */
+@keyframes service-card-float-ambient {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -1.5px, 0);
+  }
+}
+
+.service-card-float-ambient--on {
+  animation: service-card-float-ambient var(--scf-duration, 8s) ease-in-out infinite;
+  animation-delay: var(--scf-delay, 0s);
+  will-change: transform;
+}
+
+.service-card-float-ambient-inner {
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  min-height: 0;
+  transform: translateZ(0);
+}
+
+@media (hover: none) and (max-width: 767px) {
+  .service-card-float-ambient--on {
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -478,6 +549,13 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .circuit-drift-slow,
+  .circuit-drift-reverse,
+  .circuit-node-pulse,
+  .service-card-float-ambient--on {
+    animation: none !important;
   }
 }
 
